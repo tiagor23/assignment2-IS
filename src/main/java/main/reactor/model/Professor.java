@@ -21,5 +21,4 @@ public class Professor {
 
     @Column("name")
     private String name;
-    
 }
