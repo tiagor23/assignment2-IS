@@ -52,7 +52,7 @@ public class StudentProfessorController {
 
     @DeleteMapping("/students-professors/{id}")
     Mono<Object> deleteStudentProfessor(@PathVariable Integer id){
-        return studentProfessorRepository.deleteById(id).map(studentProfessor ->{
+        return studentProfessorRepository.deleteById(id).map(studentProfessor -> {
             return new ResponseEntity<>(studentProfessor, HttpStatus.OK);
         });
     }

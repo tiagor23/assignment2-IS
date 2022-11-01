@@ -3,6 +3,7 @@ package main.reactor.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,4 +43,12 @@ public class ProfessorController {
             return new ResponseEntity<>(professor, HttpStatus.CREATED);
         });
     }
+
+    @DeleteMapping("/professors/id")
+    Mono<Object> deleteProfessor(@PathVariable Integer id){
+        return professorRepository.deleteById(id).map(professor -> {
+            return new ResponseEntity<>(professor, HttpStatus.OK);
+        });
+    }
+
 }
