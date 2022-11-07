@@ -8,9 +8,9 @@ import reactor.core.publisher.Flux;
 
 public interface StudentProfessorRepository extends ReactiveCrudRepository<StudentProfessor, Integer>{
     @Query("SELECT student_id FROM students_professors WHERE professor_id = :professorId")
-    Flux<Integer> findAllStudentsByProfessorId(Integer professorId);
+    Flux<Integer> findAllStudentsByProfessorId(long professorId);
 
     @Query("SELECT professor_id FROM students_professors WHERE student_id = :studentId")
-    Flux<Integer> findAllByStudentId(Integer studentId);
+    Flux<Integer> findAllByStudentId(long l);
     
 }

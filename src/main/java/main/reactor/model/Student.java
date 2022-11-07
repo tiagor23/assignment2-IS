@@ -30,4 +30,12 @@ public class Student {
     
     @Column("averageGrade")
     private float averageGrade; 
+
+    public void setStudent(Student student){
+        id = student.getId();
+        name = student.getName();
+        birthDate = student.getBirthDate();
+        credits = student.getCredits();
+        averageGrade = student.getAverageGrade();
+    }
 }

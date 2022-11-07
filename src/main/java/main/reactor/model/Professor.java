@@ -21,4 +21,9 @@ public class Professor {
 
     @Column("name")
     private String name;
+
+    public void setProfessor(Professor professor){
+        id = professor.getId();
+        name = professor.getName();
+    }
 }

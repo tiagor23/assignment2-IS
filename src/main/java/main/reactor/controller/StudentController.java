@@ -4,13 +4,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
-import javax.net.ssl.SSLEngineResult.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,10 +46,22 @@ public class StudentController {
         });
     }
 
+    @PutMapping("/students/{id}")
+    Mono<ResponseEntity<Student>> updateStudent(@PathVariable Integer id, @RequestBody Student data) {
+        return studentRepository.findById(id)
+            .switchIfEmpty(Mono.error(new Exception("The given student doesn't exist")))
+            .flatMap(student -> {
+                student.setStudent(data); 
+                return studentRepository.save(student).map(moddedStudent -> {
+                    return new ResponseEntity<>(student, HttpStatus.ACCEPTED);
+                });
+            });
+    } 
+
     @DeleteMapping("/students/{id}")
-    Mono<Object> deleteStudent(@PathVariable Integer id){
-        return studentRepository.deleteById(id).map(student -> {
-            return new ResponseEntity<>(HttpStatus.OK);
+    Mono<ResponseEntity<Object>> deleteStudent(@PathVariable Integer id){
+        return studentRepository.deleteById(id).map(deletedStudent -> {
+            return new ResponseEntity<>(deletedStudent, HttpStatus.ACCEPTED);
         });
     }
 }
