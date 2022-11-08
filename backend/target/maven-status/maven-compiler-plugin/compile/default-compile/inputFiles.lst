@@ -1,0 +1,10 @@
+/home/tiago/Documents/github/assignment2-IS/backend/src/main/java/main/reactor/model/StudentProfessor.java
+/home/tiago/Documents/github/assignment2-IS/backend/src/main/java/main/reactor/repository/StudentProfessorRepository.java
+/home/tiago/Documents/github/assignment2-IS/backend/src/main/java/main/reactor/controller/StudentController.java
+/home/tiago/Documents/github/assignment2-IS/backend/src/main/java/main/reactor/model/Professor.java
+/home/tiago/Documents/github/assignment2-IS/backend/src/main/java/main/reactor/controller/ProfessorController.java
+/home/tiago/Documents/github/assignment2-IS/backend/src/main/java/main/reactor/repository/ProfessorRepository.java
+/home/tiago/Documents/github/assignment2-IS/backend/src/main/java/main/reactor/ReactorApplication.java
+/home/tiago/Documents/github/assignment2-IS/backend/src/main/java/main/reactor/controller/StudentProfessorController.java
+/home/tiago/Documents/github/assignment2-IS/backend/src/main/java/main/reactor/model/Student.java
+/home/tiago/Documents/github/assignment2-IS/backend/src/main/java/main/reactor/repository/StudentRepository.java
