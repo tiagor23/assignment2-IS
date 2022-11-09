@@ -95,7 +95,7 @@ public class App {
 
     private static void writelastYearGraduation(WebClient webClient) {
         webClient.get().uri("/students").retrieve().bodyToFlux(Student.class)
-            .filter(student -> student.getCredits() < 180 && student.getCredits() > 120)
+            .filter(student -> student.getCredits() < 180 && student.getCredits() >= 120)
             .sort((student1, student2) -> student1.getCredits().compareTo(student2.getCredits()))
             .subscribe(student -> {
                 try {
