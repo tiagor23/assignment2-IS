@@ -4,11 +4,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.webclient.app.model.Student;
+import com.webclient.app.model.Professor;
+import com.webclient.app.model.StudentProfessor;
 
 public class App {
     public static void main( String[] args ) {
@@ -20,6 +21,7 @@ public class App {
        writeNumberCourses(webClient);
        writelastYearGraduation(webClient);
        writeEldestStudent(webClient);
+       writeAverageNumberProfessors(webClient);
 
         try {
             Thread.sleep(2000);
@@ -139,6 +141,12 @@ public class App {
                     e.printStackTrace();
                 }               
             });
-
+    }
+    
+    private static void writeAverageNumberProfessors(WebClient webClient) {
+        webClient.get().uri("/students_professors").retrieve().bodyToFlux(StudentProfessor.class)
+            .subscribe(studentProfessor -> {
+                
+            });
     }
 }
