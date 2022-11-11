@@ -223,9 +223,6 @@ public class App {
                                         counter.addAndGet(list.size());
                                     });
                         }
-
-                        System.out.println("\n \n \n \n \n \n \n \n");
-                        System.out.println(students);
                         FileWriter myWriter = new FileWriter("avgProfPerStud.txt");
                         myWriter.write("Average professor: " + (counter.get() / students.size() + counter.get() % students.size()) + "\n");
                         myWriter.close();
