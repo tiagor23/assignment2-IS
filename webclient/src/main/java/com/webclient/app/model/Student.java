@@ -12,6 +12,10 @@ public class Student {
     
     private float averageGrade; 
 
+    public long getId() {
+        return id;
+    }
+
     public String getName(){
         return name;
     }
@@ -22,5 +26,8 @@ public class Student {
 
     public Integer getCredits() {
         return credits;
+    }
+    public float getAverageGrade(){
+        return averageGrade;
     }
 }
