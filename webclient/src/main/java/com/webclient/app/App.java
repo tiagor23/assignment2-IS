@@ -2,7 +2,6 @@ package com.webclient.app;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.BreakIterator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -10,10 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.webclient.app.model.Student;
-import com.webclient.app.model.Professor;
-import com.webclient.app.model.StudentProfessor;
 
-import reactor.core.publisher.Flux;
 
 public class App {
     public static void main(String[] args) {
@@ -232,11 +228,5 @@ public class App {
                         e.printStackTrace();
                     }
                 });
-    }
-
-    private static void writeStudsPerProf(WebClient webClient) {
-        webClient.get().uri("/students-professors").retrieve().bodyToFlux(StudentProfessor.class)
-                .collectList();
-
     }
 }

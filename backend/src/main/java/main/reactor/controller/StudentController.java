@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,14 +28,17 @@ import reactor.core.publisher.Mono;
 public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
+    Logger logger = Logger.getLogger(StudentController.class.getName());
 
     @GetMapping("/students")
     Flux<Student> getStudents(){
+        logger.info("Accessed all students");
         return studentRepository.findAll();
     }
 
     @GetMapping("/students/{id}")
     Mono<ResponseEntity<Student>> getStudent(@PathVariable Integer id){
+        logger.info("Accessed student with id: " + id);
         return studentRepository.findById(id).map(student -> {
             return new ResponseEntity<>(student, HttpStatus.OK);
         });
@@ -41,6 +46,7 @@ public class StudentController {
 
     @PostMapping("/students")
     Mono<ResponseEntity<Student>> postStudent(@RequestBody Student newStudent){
+        logger.info("Created new student");
         return studentRepository.save(newStudent).map(student -> {
             return new ResponseEntity<>(student, HttpStatus.CREATED);
         });
@@ -48,6 +54,7 @@ public class StudentController {
 
     @PutMapping("/students/{id}")
     Mono<ResponseEntity<Student>> updateStudent(@PathVariable Integer id, @RequestBody Student data) {
+        logger.info("Update student with id: " + id);
         return studentRepository.findById(id)
             .switchIfEmpty(Mono.error(new Exception("The given student doesn't exist")))
             .flatMap(student -> {
@@ -60,6 +67,7 @@ public class StudentController {
 
     @DeleteMapping("/students/{id}")
     Mono<ResponseEntity<Object>> deleteStudent(@PathVariable Integer id){
+        logger.info("Deleted student with id: " + id);
         return studentRepository.deleteById(id).map(deletedStudent -> {
             return new ResponseEntity<>(deletedStudent, HttpStatus.ACCEPTED);
         });

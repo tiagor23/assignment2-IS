@@ -11,6 +11,6 @@ public interface StudentProfessorRepository extends ReactiveCrudRepository<Stude
     Flux<Integer> findAllStudentsByProfessorId(long professorId);
 
     @Query("SELECT professor_id FROM students_professors WHERE student_id = :studentId")
-    Flux<Integer> findAllByStudentId(long l);
+    Flux<Integer> findAllProfessorsByStudentId(long studentId);
     
 }
