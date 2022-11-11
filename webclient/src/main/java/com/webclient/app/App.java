@@ -24,7 +24,6 @@ public class App {
         writeAverageNumberProfessors(webClient);
         writeAverageAndStdOfStudents(webClient);
         writeAverageAndStdOfGraduates(webClient);
-        // writeStudsPerProf(webClient);
 
         try {
             Thread.sleep(5000);
