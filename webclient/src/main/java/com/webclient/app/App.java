@@ -24,7 +24,6 @@ public class App {
         writeAverageNumberProfessors(webClient);
         writeAverageAndStdOfStudents(webClient);
         writeAverageAndStdOfGraduates(webClient);
-
         try {
             Thread.sleep(5000);
         } catch (Exception e) {
@@ -37,10 +36,10 @@ public class App {
     private static void writeNameBirthdays(WebClient webClient) {
         webClient.get().uri("/students").retrieve().bodyToFlux(Student.class).subscribe(student -> {
             try {
-                FileWriter myWriter = new FileWriter("namesBirthday.txt", true);
-                myWriter.write("student name " + student.getName() + " birthday: " + student.getBirthDate());
-                myWriter.write("\n");
-                myWriter.close();
+                FileWriter fileWriter = new FileWriter("namesBirthday.txt", true);
+                fileWriter.write("student name " + student.getName() + " birthday: " + student.getBirthDate());
+                fileWriter.write("\n");
+                fileWriter.close();
                 System.out.println("The name and birthday file was written");
             } catch (IOException e) {
                 System.out.println("An IOException was throwned");
@@ -53,10 +52,10 @@ public class App {
         webClient.get().uri("/students").retrieve().bodyToFlux(Student.class).count().subscribe(
                 count -> {
                     try {
-                        FileWriter myWriter = new FileWriter("countStudents.txt", true);
-                        myWriter.write("Number of students " + count);
-                        myWriter.write("\n");
-                        myWriter.close();
+                        FileWriter fileWriter = new FileWriter("countStudents.txt", true);
+                        fileWriter.write("Number of students " + count);
+                        fileWriter.write("\n");
+                        fileWriter.close();
                         System.out.println("Count added to file");
                     } catch (IOException e) {
                         System.out.println("An IOException was throwned");
@@ -70,10 +69,10 @@ public class App {
                 .filter(student -> student.getCredits() < 180).count()
                 .subscribe(count -> {
                     try {
-                        FileWriter myWriter = new FileWriter("countActiveStudents.txt", true);
-                        myWriter.write("Number of active students " + count);
-                        myWriter.write("\n");
-                        myWriter.close();
+                        FileWriter fileWriter = new FileWriter("countActiveStudents.txt", true);
+                        fileWriter.write("Number of active students " + count);
+                        fileWriter.write("\n");
+                        fileWriter.close();
                         System.out.println("Active count added to file");
                     } catch (IOException e) {
                         System.out.println("An IOException was throwned");
@@ -87,11 +86,11 @@ public class App {
         webClient.get().uri("/students").retrieve().bodyToFlux(Student.class)
                 .subscribe(student -> {
                     try {
-                        FileWriter myWriter = new FileWriter("allStudentsCoursesMade.txt", true);
-                        myWriter.write("Student's name: " + student.getName() + " // courses made: "
+                        FileWriter fileWriter = new FileWriter("allStudentsCoursesMade.txt", true);
+                        fileWriter.write("Student's name: " + student.getName() + " // courses made: "
                                 + student.getCredits() / 6);
-                        myWriter.write("\n");
-                        myWriter.close();
+                        fileWriter.write("\n");
+                        fileWriter.close();
                         System.out.println("All students' courses done");
                     } catch (IOException e) {
                         System.out.println("An IOException was throwned");
@@ -118,10 +117,10 @@ public class App {
                         }
                         std = Math.sqrt(std / students.size());
 
-                        FileWriter myWriter = new FileWriter("averagesStdOfStudents.txt", true);
-                        myWriter.write("Average of all students grades: " + mean
+                        FileWriter fileWriter = new FileWriter("averagesStdOfStudents.txt", true);
+                        fileWriter.write("Average of all students grades: " + mean
                                 + "\nStandard deviation of all students grades: " + std + "\n");
-                        myWriter.close();
+                        fileWriter.close();
                         System.out.println("Mean and Std done");
                     } catch (IOException e) {
                         System.out.println("An IOException was throwned");
@@ -136,10 +135,10 @@ public class App {
                 .sort((student1, student2) -> student1.getCredits().compareTo(student2.getCredits()))
                 .subscribe(student -> {
                     try {
-                        FileWriter myWriter = new FileWriter("allFinalistsStudents.txt", true);
-                        myWriter.write("Student's name: " + student.getName() + " // credits: " + student.getCredits());
-                        myWriter.write("\n");
-                        myWriter.close();
+                        FileWriter fileWriter = new FileWriter("allFinalistsStudents.txt", true);
+                        fileWriter.write("Student's name: " + student.getName() + " // credits: " + student.getCredits());
+                        fileWriter.write("\n");
+                        fileWriter.close();
                         System.out.println("All finalists done");
                     } catch (IOException e) {
                         System.out.println("An IOException was throwned");
@@ -167,10 +166,10 @@ public class App {
                         }
                         std = Math.sqrt(std / students.size());
 
-                        FileWriter myWriter = new FileWriter("averagesStdOfGraduates.txt", true);
-                        myWriter.write("Average of graduates grades: " + mean
+                        FileWriter fileWriter = new FileWriter("averagesStdOfGraduates.txt", true);
+                        fileWriter.write("Average of graduates grades: " + mean
                                 + "\nStandard deviation of graduates grades: " + std + "\n");
-                        myWriter.close();
+                        fileWriter.close();
                         System.out.println("Mean and Std of graduates done");
                     } catch (IOException e) {
                         System.out.println("An IOException was throwned");
@@ -193,10 +192,10 @@ public class App {
                 }).elementAt(0)
                 .subscribe(student -> {
                     try {
-                        FileWriter myWriter = new FileWriter("eldestStudent.txt", true);
-                        myWriter.write("Student's name: " + student.getName() + " // date: " + student.getBirthDate());
-                        myWriter.write("\n");
-                        myWriter.close();
+                        FileWriter fileWriter = new FileWriter("eldestStudent.txt", true);
+                        fileWriter.write("Student's name: " + student.getName() + " // date: " + student.getBirthDate());
+                        fileWriter.write("\n");
+                        fileWriter.close();
                         System.out.println("Eldest Student done");
                     } catch (IOException e) {
                         System.out.println("An IOException was throwned");
@@ -218,9 +217,9 @@ public class App {
                                         counter.addAndGet(list.size());
                                     });
                         }
-                        FileWriter myWriter = new FileWriter("avgProfPerStud.txt");
-                        myWriter.write("Average professor: " + (counter.get() / students.size() + counter.get() % students.size()) + "\n");
-                        myWriter.close();
+                        FileWriter fileWriter = new FileWriter("avgProfPerStud.txt");
+                        fileWriter.write("Average professor: " + (counter.get() / students.size() + counter.get() % students.size()) + "\n");
+                        fileWriter.close();
                         System.out.println("Average professor done \n");
                     } catch (IOException e) {
                         System.out.println("An IOException was throwned");

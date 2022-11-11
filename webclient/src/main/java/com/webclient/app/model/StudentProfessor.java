@@ -5,6 +5,9 @@ public class StudentProfessor {
     private Integer student_id;
     private Integer professor_id;
 
+    public long getId() {
+        return id;
+    }
     public Integer getStudentId() {
         return student_id;
     }
